@@ -86,6 +86,7 @@ def handleregister(request):
 def home(request):
     return render(request,'plan_api/home.html', )
 
+@login_required(login_url="/loginuser/")
 def userhome(request):
     if request.method=="POST": 
         operator=request.POST['operator']  
@@ -96,7 +97,8 @@ def userhome(request):
         return render(request,"api_access/userhome.html",{"items":items})
     else :
         return render(request,"api_access/userhome.html" )
-
+        
+@login_required(login_url="/loginuser/")
 def recharge(request):
     user=request.user 
     token=str(Token.objects.get(user=user))
